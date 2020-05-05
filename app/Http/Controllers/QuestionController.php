@@ -7,62 +7,49 @@ use App\Model\Question;
 use App\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
      return QuestionResource::collection(Question::latest()->get());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         // auth()->user()->question()->create($request->all());
-        Question::create($request->all());
+     $data = Question::create($request->all());
         return response("berhasil dibuat", response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Question  $question
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Question $question)
     {
         return new QuestionResource($question);
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Question $question)
+    public function edit(Question $question)
     {
-        //
+        return New QuestionResource($question);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Question  $question
-     * @return \Illuminate\Http\Response
-     */
+
+    // public function update(Request $request, Question $question)
+    // {
+    //     $question->update($request->all());
+    //     return response('Updated', Response::HTTP_ACCEPTED);
+    // }
+  
+    public function update(Question $question,Request $request)
+    {
+       
+       $question->update($request->all());
+       return response("berhasil diupdate", response::HTTP_CREATED);
+     
+     
+    }
     public function destroy(Question $question)
     {
         $question->delete();
