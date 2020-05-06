@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Model\Category;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use illuminate\support\str;
 
 class CategoryController extends Controller
 {
@@ -14,18 +17,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = CategoryResource::collection(Category::latest()->get());
+        return $data; 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +30,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Category::create($request->all());
+        $category = New Category;
+        $category->name = $request->name;
+        $category->slug = str::slug($request->name);
+        $category->save();
+        return response("berhasil dibuat", response::HTTP_CREATED);
     }
 
     /**
@@ -46,8 +46,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
-    }
+        
+        return New CategoryResource($category);
+;    }
 
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +70,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        // dd($request->all());
+        $category->update([
+            'name' => $request->name,
+            'slug' => str::slug($request->name)
+        ]);
+        
+
+        return response("Berhasil di update", response::HTTP_OK);
     }
 
     /**
@@ -80,6 +88,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response("Berhasil dihapus", response::HTTP_OK);
     }
 }
