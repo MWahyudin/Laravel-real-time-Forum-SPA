@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 Route::apiResource('/question', 'QuestionController');
 
@@ -26,3 +23,17 @@ Route::apiResource('/question/{question}/reply', 'ReplyController');
 
 Route::post('/reply/{reply}/like' , 'LikeController@like');
 Route::delete('/reply/{reply}/like' , 'LikeController@unlike');
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
