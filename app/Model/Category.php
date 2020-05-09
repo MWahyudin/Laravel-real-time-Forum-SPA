@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -19,4 +20,5 @@ class Category extends Model
     {
         return asset("api/question/$this->slug");
     }
+
 }

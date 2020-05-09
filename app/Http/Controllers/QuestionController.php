@@ -11,6 +11,16 @@ use Illuminate\Support\Str;
 
 class QuestionController extends Controller
 {
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('JWT', ['except' => ['index','show']]);
+    }
+    
     public function index()
     {
      return QuestionResource::collection(Question::latest()->get());
@@ -20,7 +30,13 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         // auth()->user()->question()->create($request->all());
-     $data = Question::create($request->all());
+        Question::create([
+        'title' => $request->title,
+        'slug' => str::slug($request->title),
+        'body' => $request->body,
+        'category_id' => $request->category_id,
+        'user_id' => $request->user_id,
+    ]);
         return response("berhasil dibuat", response::HTTP_CREATED);
     }
 
