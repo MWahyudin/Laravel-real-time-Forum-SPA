@@ -2,7 +2,7 @@
     <v-container>
         <v-form @submit.prevent="login">
             <v-text-field v-model="form.email" label="E-mail" type="email" required></v-text-field>
-            <v-text-field v-model="form.password" :counter="10" label="Password" type="password" required>
+            <v-text-field v-model="form.password" :counter="10" label="Password" type="text" required>
             </v-text-field>
             <v-btn color="primary" type="submit">
                 Login
@@ -21,14 +21,14 @@
                 }
             }
         },
-        methods: {
-            login(){
-                axios.post('api/auth/login', this.form)
-                .then(res => console.log(res.data))
-                .catch(error => console.log(error.response.data))
-            }
-        }
+      methods:{
+      login() {
+      User.login(this.form);
     }
+       
+    }
+    }
+
 
 </script>
 
