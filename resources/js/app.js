@@ -1,5 +1,6 @@
 window.Vue = require('vue');
 import Vue from 'vue'
+window.axios = require('axios');
 import Vuetify from 'vuetify'
 
 //Material Design icon
@@ -19,10 +20,6 @@ export default new Vuetify({
 
 //Component Initialize
 import apphome from './components/AppHome.vue';
-
-
-//Initialize Vuetify
-Vue.use(Vuetify)
 
 //Register Component
 Vue.component('home', apphome);
