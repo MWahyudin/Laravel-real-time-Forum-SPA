@@ -1,32 +1,35 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-require('./bootstrap');
-
 window.Vue = require('vue');
+import Vue from 'vue'
+import Vuetify from 'vuetify'
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+//Material Design icon
+import '@mdi/font/css/materialdesignicons.css'
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+//Vue Router
+import router from './Router/router.js'
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.use(Vuetify)
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+export default new Vuetify({
+    icons: {
+        iconfont: 'mdi', // default - only for display purposes
+    },
+})
 
-const app = new Vue({
+
+//Component Initialize
+import apphome from './components/AppHome.vue';
+
+
+//Initialize Vuetify
+Vue.use(Vuetify)
+
+//Register Component
+Vue.component('home', apphome);
+
+
+new Vue({
     el: '#app',
-});
+    vuetify: new Vuetify(),
+    router
+})
