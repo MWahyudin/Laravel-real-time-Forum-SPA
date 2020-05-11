@@ -12,13 +12,15 @@
     import toolbar from './Toolbar'
     import appfooter from './AppFooter'
     import applogin from '../components/login/AppLogin'
+    import appsignup from '../components/login/AppSignup'
     import appforum from '../components/menu/AppForum'
     export default {
         components: {
             toolbar,
             appfooter,
             applogin,
-            appforum
+            appforum,
+            appsignup
         }
     }
 

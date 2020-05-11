@@ -1,11 +1,18 @@
 <template>
-  <h1>Ini pertanyaan</h1>
+    <h1>Ini pertanyaan</h1>
 </template>
 
 <script>
-export default {
+    export default {
+        created() {
+            if (!User.loggedIn()) {
+                this.$router.push({
+                    name: 'login'
+                })
+            }
+        },
+    }
 
-}
 </script>
 
 <style>

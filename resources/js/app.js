@@ -32,7 +32,7 @@ Vue.component('home', apphome);
 
 import User from './Helpers/User.js'
 window.User = User
-console.log(User.id());
+window.EventBus = new Vue();
 
 
 
