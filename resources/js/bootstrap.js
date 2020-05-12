@@ -19,9 +19,17 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
+
+//ERROR DISINI HARUS TARO DI ROOTNYA BUKAN DI MARI -_-!! 
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+const JWT_token = `Bearer ${localStorage.getItem('token')}`
+window.axios.defaults.headers.common['Authorization'] = JWT_token;
+
+
+// window.axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}` 
+// Authorization: Bearer TOKEN_STRING
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -1,26 +1,27 @@
-class AppStorage {
-    storeToken(token) {
-        localStorage.setItem('token', token)
-    }
-    storeUser(user) {
-        localStorage.setItem('user', user)
+class AppStorage{
+    storeToken(token){
+        localStorage.setItem('token',token);
     }
 
-    store(token, user) {
-        this.storeToken(token)//salah disini user dlu
-        this.storeUser(user)
+    storeUser(user){
+        localStorage.setItem('user',user);
     }
 
-    clear() {
+    store(user,token){
+        this.storeToken(user)
+        this.storeUser(token)
+    }
+
+    clear(){
         localStorage.removeItem('token')
         localStorage.removeItem('user')
     }
 
-    getToken() {
+    getToken(){
         return localStorage.getItem('token')
     }
 
-    getUser() {
+    getUser(){
         return localStorage.getItem('user')
     }
 }

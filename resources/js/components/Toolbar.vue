@@ -1,28 +1,29 @@
 <template>
-    <v-toolbar>
+<v-toolbar >
         <v-toolbar-title class="indigo--text">Indramayu Programmer Community</v-toolbar-title>
 
         <v-spacer></v-spacer>
-        <!-- eslint-disable vue/no-use-v-if-with-v-for,vue/no-confusing-v-for-v-if -->
-        <div class="frm">
             <router-link v-for="item in items" :key="item.title" :to="item.to" v-if="item.show">
                 <v-btn class="ma-2" outlined color="indigo">{{ item.title }}</v-btn>
             </router-link>
-        </div>
-    </v-toolbar>
-</template>
+
+</v-toolbar>
 </template>
 
-</template>
 
 <script>
     export default {
         data() {
             return {
                 items: [{
+                    title: 'Beranda',
+                    to: '/beranda',
+                    show: true
+                },
+                {
                         title: 'Forum',
                         to: '/forum',
-                        show: true
+                        show: User.loggedIn()
                     },
                     {
                         title: 'Login',

@@ -18,5 +18,8 @@ route::get('/', function(){
 route::get('/{any}', function(){
     return view('homepage');
 });
+route::get('/{any}/{any1}', function(){
+    return view('homepage');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
