@@ -9,15 +9,22 @@ window.axios.defaults.headers.common['Authorization'] = JWT_token;
 //vvuetify
 import Vuetify from 'vuetify'
 
+Vue.use(Vuetify)
+
 //Material Design icon
 import '@mdi/font/css/materialdesignicons.css'
+
+//Vuelidate
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+// Vue.use(window.vuelidate.default)
+
 
 
 
 //Vue Router
 import router from './Router/router.js'
 
-Vue.use(Vuetify)
 
 
 // export default new Vuetify({

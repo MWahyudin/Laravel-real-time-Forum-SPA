@@ -30,13 +30,17 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         // auth()->user()->question()->create($request->all());
-        Question::create([
-        'title' => $request->title,
-        'slug' => str::slug($request->title),
-        'body' => $request->body,
-        'category_id' => $request->category_id,
-        'user_id' => $request->user_id,
-    ]);
+    //     Question::create([
+    //     'title' => $request->title,
+    //     'slug' => str::slug($request->title),
+    //     'body' => $request->body,
+    //     'category_id' => $request->category_id,
+    //     'user_id' => $request->user_id,
+    // ]);
+
+    //Trik dengan menggunakan model setiap buat slug otomatis
+    // $request['slug'] = str::slug($request->title);
+    auth()->user()->question()->create($request->all());
         return response("berhasil dibuat", response::HTTP_CREATED);
     }
 
