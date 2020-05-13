@@ -9,6 +9,7 @@ import Applogin from '../components/login/AppLogin'
 import Applogout from '../components/login/AppLogout'
 import Appforum from '../components/menu/AppForum'
 import BuatPertanyaan from '../Components/menu/AppBuatPertanyaan'
+// import EditQuestion from '../Components/menu/AppEditQuestion'
 import Appkategori from '../components/menu/Appkategori'
 import read from '../components/menu/AppRead'
 import appsignup from '../components/login/AppSignup.vue'
@@ -19,6 +20,7 @@ const routes = [
     { path: '/logout', component: Applogout },
     { path: '/forum', component: Appforum, name:'forum'},
     { path: '/pertanyaan', component: BuatPertanyaan },
+    // { path: '/edit', component: EditQuestion },
     { path: '/kategori', component: Appkategori },
     { path: '/daftar', component: appsignup, name: 'signup'},
     { path: '/question/:slug', component: read, name: 'read'},

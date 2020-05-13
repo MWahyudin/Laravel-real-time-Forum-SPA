@@ -66,9 +66,7 @@
             // },
             create() {
                 axios.post('/api/question', this.form)
-                    .then(res => {
-                        console.log(res)
-                    })
+                    .then(res => this.$router.push(res.data.path))
                     .catch(res => {
                         console.log(res.message);
 

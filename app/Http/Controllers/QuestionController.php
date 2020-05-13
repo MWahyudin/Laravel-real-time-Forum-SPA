@@ -40,8 +40,8 @@ class QuestionController extends Controller
 
     //Trik dengan menggunakan model setiap buat slug otomatis
     // $request['slug'] = str::slug($request->title);
-    auth()->user()->question()->create($request->all());
-        return response("berhasil dibuat", response::HTTP_CREATED);
+   $question = auth()->user()->question()->create($request->all());
+        return response(new QuestionResource($question), response::HTTP_CREATED);
     }
 
    

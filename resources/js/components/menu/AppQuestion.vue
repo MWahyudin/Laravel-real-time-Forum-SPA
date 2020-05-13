@@ -9,8 +9,7 @@
             </router-link>
         </v-card-title>
 
-        <v-card-text class="headline font-weight-bold">
-            {{ data.body }}
+        <v-card-text class="headline font-weight-bold" v-html="body">
         </v-card-text>
 
         <v-card-actions>
@@ -33,6 +32,7 @@
     </v-card>
 </template>
 <script>
+import md from 'marked'
     export default {
         props: ['data'],
         created() {
@@ -40,6 +40,11 @@
                 this.$router.push({
                     name: 'beranda'
                 })
+            }
+        },
+        computed: {
+              body(){
+                return md.parse(this.data.body);
             }
         },
     }

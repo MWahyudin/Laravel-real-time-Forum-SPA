@@ -1,8 +1,8 @@
 <template>
     <v-layout row wrap="">
         <v-flex xs8>
-            <question v-for="question in questions" :key="question.id"
-            :data=question></question>
+            <appquestion v-for="question in questions" :key="question.id"
+            :data=question></appquestion>
         </v-flex>
         <sidebar></sidebar>
     </v-layout>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import question from './AppQuestion'
+    import appquestion from './AppQuestion'
     import sidebar from './AppSidebar'
     export default {
         data() {
@@ -21,7 +21,7 @@
             }
         },
         components: {
-            question,
+            appquestion,
             sidebar
         },
         created() {

@@ -19,7 +19,9 @@ import Vuelidate from 'vuelidate'
 Vue.use(Vuelidate)
 // Vue.use(window.vuelidate.default)
 
-
+//Mark down
+import md from 'marked'
+window.md = md
 
 
 //Vue Router
