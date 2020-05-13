@@ -1,10 +1,14 @@
 <template>
     <div>
         <toolbar></toolbar>
+        <v-app>
+            <v-content>
       <router-view></router-view>
-        <appfooter></appfooter>
-
+            </v-content>
+        </v-app>
+        <appfooter v-if="!beranda"></appfooter>
     </div>
+    
 </template>
 
 
@@ -21,9 +25,10 @@
             applogin,
             appforum,
             appsignup
-        }
+        },
     }
 
 </script>
 
-<style></style>
+<style>
+</style>

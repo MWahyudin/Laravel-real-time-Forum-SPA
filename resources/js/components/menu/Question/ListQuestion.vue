@@ -1,5 +1,5 @@
 <template>
-    <v-card color="#26c6da" class="ml-12 mt-6 mb-6" dark max-width="900">
+    <v-card color="#26c6da" class="ml-12 mt-6 mb-6">
         <v-card-title>
             <v-icon large left>
                 mdi-comment-text

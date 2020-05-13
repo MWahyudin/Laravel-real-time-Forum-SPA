@@ -1,17 +1,18 @@
 <template>
-    <v-layout row wrap="">
+    <v-layout row wrap>
         <v-flex xs8>
-            <listquestion v-for="question in questions" :key="question.id"
-            :data=question></listquestion>
+            <listquestion v-for="question in questions" :key="question.id" :data=question></listquestion>
         </v-flex>
-        <sidebar></sidebar>
+        <v-flex>
+            <sidebar></sidebar>
+        </v-flex>
     </v-layout>
 
 </template>
 
 <script>
     import listquestion from './Question/ListQuestion'
-    import sidebar from './AppSidebar'
+    import sidebar from '../AppSidebar'
     export default {
         data() {
             return {
@@ -25,7 +26,7 @@
             sidebar
         },
         created() {
-                if (!User.loggedIn()) {
+            if (!User.loggedIn()) {
                 this.$router.push({
                     name: 'login'
                 })

@@ -36,8 +36,8 @@
                         show: User.loggedIn()
                     },
                     {
-                        title: 'kategori',
-                        to: '/kategori',
+                        title: 'Create category',
+                        to: '/create-category',
                         show: User.loggedIn()
                     },
                     {
@@ -51,7 +51,7 @@
         created() {
             EventBus.$on('logout', () => {
                 User.logout()
-            })
+            })  
         },
     }
 

@@ -1,4 +1,6 @@
 <template>
+<v-app>
+<v-content>
     <v-container>
         <v-form @submit.prevent="signup">
             <v-text-field v-model="form.name" label="Name" type="text" required></v-text-field>
@@ -15,11 +17,13 @@
             <v-btn type="submit" class="ma-2" outlined color="green">
                 Daftar
             </v-btn>
-            <router-link to="login">
-                <v-btn outlined color="indigo">Login</v-btn>
+            <router-link to="login" >
+                <v-btn outlined color="indigo" class="mb-12">Login</v-btn>
             </router-link>
         </v-form>
     </v-container>
+</v-content>
+</v-app>
 </template>
 
 <script>

@@ -39,11 +39,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // Category::create($request->all());
-        $category = New Category;
-        $category->name = $request->name;
-        $category->slug = str::slug($request->name);
-        $category->save();
+        Category::create($request->all());
+        // $category = New Category;
+        // $category->name = $request->name;
+        // $category->slug = str::slug($request->name);
+        // $category->save();
         return response("berhasil dibuat", response::HTTP_CREATED);
     }
 
