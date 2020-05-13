@@ -2,18 +2,18 @@
     <div v-if="question">
         <editquestion v-if="editing" :data=question></editquestion>
        
-            <showquestion v-else :data=question> </showquestion>
+            <show v-else :data=question> </show>
     </div>
 </template>
 
 <script>
-    import showquestion from './AppShowQuestion'
-    import editquestion from './EditQuestion'
+    import show from './show'
+    import editquestion from './Edit'
     // import editquestion from './AppEditQuestion'
 
     export default {
         components: {
-            showquestion,
+            show,
             editquestion
         },
         data() {

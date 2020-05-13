@@ -31,8 +31,8 @@
                         show: !User.loggedIn()
                     },
                     {
-                        title: 'Tanya Pertanyaan',
-                        to: '/pertanyaan',
+                        title: 'Ask Question',
+                        to: '/create-question',
                         show: User.loggedIn()
                     },
                     {

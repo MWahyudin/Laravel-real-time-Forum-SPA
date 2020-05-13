@@ -7,7 +7,7 @@
             <vue-simplemde v-model="form.body" ref="markdownEditor" />
 
             <v-btn type="submit" class="" outlined color="indigo">
-                Buat pertanyaan
+               Create
             </v-btn>
 
         </v-form>
