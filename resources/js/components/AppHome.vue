@@ -6,7 +6,7 @@
       <router-view></router-view>
             </v-content>
         </v-app>
-        <appfooter v-if="!beranda"></appfooter>
+        <appfooter></appfooter>
     </div>
     
 </template>

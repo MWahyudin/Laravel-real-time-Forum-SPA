@@ -39,7 +39,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
+        $data = $request->validate([
+           'name' => 'required|min:4' 
+        ]);
+        Category::create(array_merge($data, [
+            'slug' => str::slug($request->name)
+        ]));
         // $category = New Category;
         // $category->name = $request->name;
         // $category->slug = str::slug($request->name);

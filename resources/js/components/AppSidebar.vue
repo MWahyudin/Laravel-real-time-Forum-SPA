@@ -3,7 +3,7 @@
         <v-list dense rounded>
             <v-subheader>List Category</v-subheader>
             <v-list-item-group color="primary">
-                <v-list-item v-for="categori in categories" :key="categori.id">
+                <v-list-item v-for="categori in categories" :key="categori.slug">
                     <v-list-item-content>
                         <v-list-item-title v-text="categori.name"></v-list-item-title>
                     </v-list-item-content>

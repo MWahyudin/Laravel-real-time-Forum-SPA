@@ -63,6 +63,16 @@ import 'simplemde/dist/simplemde.min.css'
 
 Vue.component('vue-simplemde', VueSimplemde)
 
+//Laravel Vue Validation
+import LaravelVueValidator from 'laravel-vue-validator'
+  
+Vue.use(LaravelVueValidator)
+
+import { ValidationProvider } from 'vee-validate';
+
+// Register it globally
+// main.js or any entry file.
+Vue.component('ValidationProvider', ValidationProvider);
 
 new Vue({
     el: '#app',
