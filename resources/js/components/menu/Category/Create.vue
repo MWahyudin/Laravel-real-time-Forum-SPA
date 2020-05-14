@@ -86,6 +86,9 @@
             }
         },
         created() {
+            if(!User.admin()){
+                this.$router.push('/forum')
+            }
             this.getCategories()
             EventBus.$on('reload', () => {
                 this.getCategories()

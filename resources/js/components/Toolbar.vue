@@ -38,7 +38,7 @@
                     {
                         title: 'Create category',
                         to: '/create-category',
-                        show: User.loggedIn()
+                        show: User.admin()
                     },
                     {
                         title: 'Logout',

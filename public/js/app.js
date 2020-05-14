@@ -2377,7 +2377,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         title: 'Create category',
         to: '/create-category',
-        show: User.loggedIn()
+        show: User.admin()
       }, {
         title: 'Logout',
         to: '/logout',
@@ -2703,6 +2703,10 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectS
   },
   created: function created() {
     var _this = this;
+
+    if (!User.admin()) {
+      this.$router.push('/forum');
+    }
 
     this.getCategories();
     EventBus.$on('reload', function () {
@@ -87928,6 +87932,11 @@ var User = /*#__PURE__*/function () {
     key: "own",
     value: function own(id) {
       return this.id() == id;
+    }
+  }, {
+    key: "admin",
+    value: function admin() {
+      return this.id() == 18;
     }
   }]);
 
