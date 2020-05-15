@@ -8,13 +8,14 @@
                 <replies  :replies="question.replies" :question="question" v-if="!newReply"></replies>
            <p v-if="!hideme"></p>
             <newreply v-if="hideme"  :questionSlug="question.slug"></newreply>
+            <!-- <editreply v-if="editreply"  :reply="question.replies"></editreply> -->
     </div>
 </template>
 
 <script>
     import show from './show'
     import editquestion from './Edit'
-
+import editreply from '../reply/editReply'
 import replies from '../reply/replies'
 import newreply from '../reply/newReply'
 
@@ -26,6 +27,7 @@ import newreply from '../reply/newReply'
             editquestion,
             replies,
             newreply,
+            // editreply
           
         },
         data() {
@@ -33,7 +35,7 @@ import newreply from '../reply/newReply'
                 question: null,
                 editing: false,
                 newReply: false,
-                editReply: false,
+                // editreply: false,
                 hideme: false,
             }
         },
@@ -48,12 +50,23 @@ import newreply from '../reply/newReply'
                     this.hideme = false
                     this.newReply = true
                 })
+                // EventBus.$on('editreply', ()=> {
+                //       this.editing = false
+                //     this.hideme = false
+                //     this.newReply = true
+                //     this.editreply = true
+                // })
                 EventBus.$on('cancelEditing', () => {
                     this.editing = false
                     this.newReply = false
                     this.hideme = false
 
                 })
+                // EventBus.$on('cancelEditReply', () => {
+                //   console.log('ok');
+                  
+
+                // })
                   EventBus.$on('newReply', () => {
                     this.newReply = true
                     this.hideme = true
@@ -65,11 +78,11 @@ import newreply from '../reply/newReply'
                     this.editReply = false
                      this.getQuestion()
                 })
-                //     EventBus.$on('editReply', () => {
-                //     this.editReply = true
-                //     this.newReply = false
-                //     this.editing = true
-                // })
+                    EventBus.$on('editReply', () => {
+                    this.editReply = true
+                    this.newReply = false
+                    this.editing = true
+                })
                    EventBus.$on('cancelReply', () => {
                     this.newReply = false
                     this.hideme = false

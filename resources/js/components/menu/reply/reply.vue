@@ -83,7 +83,8 @@ import md from 'marked'
               
             },
             edit(){
-                EventBus.$emit("editReply")
+                EventBus.$emit("editreply")
+                console.log(this.reply.body)
             },
             listen(){
                 EventBus.$on("editReply", () => {
