@@ -18,11 +18,20 @@
                 <v-icon color="red">mdi-delete</v-icon>
             </v-btn>
         </v-card-actions>
+        <v-card-actions>
+          
+            <v-btn icon @click="newReply">
+                <v-icon color="">mdi-comment-multiple-outline</v-icon>
+            </v-btn>
+             <v-btn icon @click="like">
+                <v-icon color="primary">mdi-check</v-icon>
+            </v-btn>
+        </v-card-actions>
       <v-spacer></v-spacer>
        
                 <v-row  justify="end">
                     <v-icon class="mb-2">mdi-timer</v-icon>
-                    <span class="subheading mr-8 mb-2">5 komentar</span>
+                    <span class="subheading mr-8 mb-2" dark>{{ data.reply_total }} komentar</span>
                 </v-row>
     </v-card>
 </template>
@@ -51,7 +60,15 @@
             },
             edit(){
                 EventBus.$emit('startEditing')
-            }
+            },
+            newReply(){
+                EventBus.$emit('newReply')
+
+            },
+            like(){
+
+            },
+           
         }
 
     }

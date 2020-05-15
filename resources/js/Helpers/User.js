@@ -13,9 +13,8 @@ class User {
         const username = res.data.user
 
         if (Token.isValid(access_token)) {
-            // console.log(access_token);
-            
-            AppStorage.store(access_token, username)
+           
+            AppStorage.store(username, access_token)
             window.location = '/forum'
         }
     }
@@ -23,7 +22,7 @@ class User {
     hasToken(){
         const storedToken = AppStorage.getToken()
        if(storedToken){
-          return Token.isValid(storedToken) ? true : false
+          return Token.isValid(storedToken) ? true : this.logout()
        }
 
        return false
@@ -34,31 +33,30 @@ class User {
         return this.hasToken()
         
     }
-
+  
     logout(){
         AppStorage.clear()
         window.location = '/forum';
     }
     name(){
-        if(this.loggedIn){
+        if(this.loggedIn()){
             return AppStorage.getUser()
         }
-    }
-
+    }   
     id(){
-        if(this.loggedIn){
+        if(this.loggedIn()){ //this.loggedIn ga ada kurung artinya bukan function
            const payload = Token.payload(AppStorage.getToken())
            return payload.sub
         }
-    }
+}
     
-    own(id){
-        return this.id() == id;
-    }
+own(id) {
+    return this.id() == id
+}
 
-    admin(){
-        return this.id() == 18
-    }
+admin() {
+    return this.id() == 1
+}
 
 }
 

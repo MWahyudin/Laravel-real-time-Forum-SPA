@@ -11,6 +11,7 @@ class Question extends Model
 {
 
     protected $fillable = ['title','slug','body','category_id','user_id'];
+    protected $with = ['replies'];
     public static function boot(){
         parent::boot();
 

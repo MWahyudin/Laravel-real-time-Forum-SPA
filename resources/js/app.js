@@ -73,6 +73,7 @@ import { ValidationProvider } from 'vee-validate';
 // Register it globally
 // main.js or any entry file.
 Vue.component('ValidationProvider', ValidationProvider);
+User.id();
 
 new Vue({
     el: '#app',

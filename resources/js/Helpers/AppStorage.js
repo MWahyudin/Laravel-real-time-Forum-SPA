@@ -8,8 +8,8 @@ class AppStorage{
     }
 
     store(user,token){
-        this.storeToken(user)
-        this.storeUser(token)
+        this.storeToken(token)
+        this.storeUser(user)
     }
 
     clear(){

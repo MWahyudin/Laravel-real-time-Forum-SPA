@@ -3,23 +3,37 @@
         <editquestion v-if="editing" :data=question></editquestion>
        
             <show v-else :data=question> </show>
+    
+        
+                <replies :replies="question.replies" :question="question" v-if="!newReply"></replies>
+            <newreply v-else :replies="question.replies" :question="question"></newreply>
+    
     </div>
 </template>
 
 <script>
     import show from './show'
     import editquestion from './Edit'
+
+import replies from '../reply/replies'
+import newreply from '../reply/newReply'
+
     // import editquestion from './AppEditQuestion'
 
     export default {
         components: {
             show,
-            editquestion
+            editquestion,
+            replies,
+            newreply,
+          
         },
         data() {
             return {
                 question: null,
-                editing: false
+                editing: false,
+                newReply: false,
+                editReply: false
             }
         },
         created() {
@@ -33,6 +47,20 @@
                 })
                 EventBus.$on('cancelEditing', () => {
                     this.editing = false
+                })
+                  EventBus.$on('newReply', () => {
+                    this.newReply = true
+                })
+                //     EventBus.$on('editReply', () => {
+                //     this.editReply = true
+                //     this.newReply = false
+                //     this.editing = true
+                // })
+                   EventBus.$on('cancelReply', () => {
+                    this.newReply = false
+                })
+                  EventBus.$on('reload', () => {
+                   this.getQuestion()
                 })
             },
             getQuestion() {
