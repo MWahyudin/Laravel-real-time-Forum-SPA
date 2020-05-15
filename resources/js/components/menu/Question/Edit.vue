@@ -40,7 +40,7 @@
         methods: {
             edit() {
                 axios.patch(`/api/question/${this.data.slug}`, this.form)
-                    .then(res => this.cancel())
+                    .then(EventBus.$emit('afterEdit'))
                     .catch(err => {
                         console.error(err);
                     })

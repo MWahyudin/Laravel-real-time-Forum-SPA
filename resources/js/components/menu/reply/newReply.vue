@@ -6,7 +6,7 @@
 
 
 
-            <v-btn @click="newReply(question.slug)" class="" outlined color="indigo">
+            <v-btn @click="newReply()" class="" outlined color="indigo">
                 Reply
             </v-btn>
             <v-btn class="" outlined color="red" @click="cancel">
@@ -20,7 +20,7 @@
 
 <script>
     export default {
-        props: ['replies', 'question'],
+        props: ['questionSlug'],
         data() {
             return {
                 form: {
@@ -32,8 +32,8 @@
             }
         },
         methods: {
-            newReply(slug) {
-                axios.post(`/api/question/${slug}/reply`, this.form)
+            newReply() {
+                axios.post(`/api/question/${this.questionSlug}/reply`, this.form)
                      .then(() => Vue.swal({
                                 icon: "success",
                                 title: "Data saving successfully"

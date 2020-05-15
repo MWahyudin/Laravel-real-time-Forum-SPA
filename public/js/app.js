@@ -2855,20 +2855,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     edit: function edit() {
-      var _this = this;
-
-      axios.patch("/api/question/".concat(this.data.slug), this.form).then(function (res) {
-        return _this.cancel();
-      })["catch"](function (err) {
+      axios.patch("/api/question/".concat(this.data.slug), this.form).then(EventBus.$emit('afterEdit'))["catch"](function (err) {
         console.error(err);
       });
     },
     getCategories: function getCategories() {
-      var _this2 = this;
+      var _this = this;
 
       var url = '/api/category';
       axios.get(url).then(function (res) {
-        return _this2.categories = res.data.data;
+        return _this.categories = res.data.data;
       })["catch"](function (err) {
         console.error(err);
       });
@@ -2987,7 +2983,8 @@ __webpack_require__.r(__webpack_exports__);
       question: null,
       editing: false,
       newReply: false,
-      editReply: false
+      editReply: false,
+      hideme: false
     };
   },
   created: function created() {
@@ -3000,12 +2997,25 @@ __webpack_require__.r(__webpack_exports__);
 
       EventBus.$on('startEditing', function () {
         _this.editing = true;
+        _this.hideme = false;
+        _this.newReply = true;
       });
       EventBus.$on('cancelEditing', function () {
         _this.editing = false;
+        _this.newReply = false;
+        _this.hideme = false;
       });
       EventBus.$on('newReply', function () {
         _this.newReply = true;
+        _this.hideme = true;
+      });
+      EventBus.$on('afterEdit', function () {
+        _this.newReply = false;
+        _this.hideme = false;
+        _this.editing = false;
+        _this.editReply = false;
+
+        _this.getQuestion();
       }); //     EventBus.$on('editReply', () => {
       //     this.editReply = true
       //     this.newReply = false
@@ -3014,6 +3024,7 @@ __webpack_require__.r(__webpack_exports__);
 
       EventBus.$on('cancelReply', function () {
         _this.newReply = false;
+        _this.hideme = false;
       });
       EventBus.$on('reload', function () {
         _this.getQuestion();
@@ -3095,13 +3106,28 @@ __webpack_require__.r(__webpack_exports__);
     destroy: function destroy() {
       var _this = this;
 
-      axios["delete"]("/api/question/".concat(this.data.slug)).then(function (res) {
-        return _this.$router.push({
-          name: "forum"
-        });
-      })["catch"](function (err) {
-        console.error(err.response.data);
-      });
+      Vue.swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]("/api/question/".concat(_this.data.slug));
+          Vue.swal('Deleted!', 'Your Post has been deleted.', 'success');
+
+          _this.$router.push('/forum');
+        }
+      }); // axios.delete(`/api/question/${this.data.slug}`)
+      // .then(res => this.$router.push({
+      //     name: "forum"
+      // }))
+      // .catch(err => {
+      //     console.error(err.response.data); 
+      // })
     },
     edit: function edit() {
       EventBus.$emit('startEditing');
@@ -3145,7 +3171,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['replies', 'question'],
+  props: ['questionSlug'],
   data: function data() {
     return {
       form: {
@@ -3156,8 +3182,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    newReply: function newReply(slug) {
-      axios.post("/api/question/".concat(slug, "/reply"), this.form).then(function () {
+    newReply: function newReply() {
+      axios.post("/api/question/".concat(this.questionSlug, "/reply"), this.form).then(function () {
         return Vue.swal({
           icon: "success",
           title: "Data saving successfully"
@@ -29983,9 +30009,13 @@ var render = function() {
             ? _c("replies", {
                 attrs: { replies: _vm.question.replies, question: _vm.question }
               })
-            : _c("newreply", {
-                attrs: { replies: _vm.question.replies, question: _vm.question }
-              })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.hideme ? _c("p") : _vm._e(),
+          _vm._v(" "),
+          _vm.hideme
+            ? _c("newreply", { attrs: { questionSlug: _vm.question.slug } })
+            : _vm._e()
         ],
         1
       )
@@ -30164,7 +30194,7 @@ var render = function() {
               attrs: { outlined: "", color: "indigo" },
               on: {
                 click: function($event) {
-                  return _vm.newReply(_vm.question.slug)
+                  return _vm.newReply()
                 }
               }
             },

@@ -50,16 +50,37 @@
         },
         methods: {
             destroy(){
-                axios.delete(`/api/question/${this.data.slug}`)
-                .then(res => this.$router.push({
-                    name: "forum"
-                }))
-                .catch(err => {
-                    console.error(err.response.data); 
+                 Vue.swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                }).then((result) => {
+                    if (result.value) {
+                        axios.delete(`/api/question/${this.data.slug}`)
+                        Vue.swal(
+                            'Deleted!',
+                            'Your Post has been deleted.',
+                            'success'
+                        )
+                        this.$router.push('/forum')
+                    }
                 })
+                // axios.delete(`/api/question/${this.data.slug}`)
+                // .then(res => this.$router.push({
+                //     name: "forum"
+                // }))
+                // .catch(err => {
+                //     console.error(err.response.data); 
+                // })
             },
             edit(){
                 EventBus.$emit('startEditing')
+        
+
             },
             newReply(){
                 EventBus.$emit('newReply')

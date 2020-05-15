@@ -2,12 +2,12 @@
     <div v-if="question">
         <editquestion v-if="editing" :data=question></editquestion>
        
-            <show v-else :data=question> </show>
+            <show v-else :data=question > </show>
     
         
-                <replies :replies="question.replies" :question="question" v-if="!newReply"></replies>
-            <newreply v-else :replies="question.replies" :question="question"></newreply>
-    
+                <replies  :replies="question.replies" :question="question" v-if="!newReply"></replies>
+           <p v-if="!hideme"></p>
+            <newreply v-if="hideme"  :questionSlug="question.slug"></newreply>
     </div>
 </template>
 
@@ -33,7 +33,8 @@ import newreply from '../reply/newReply'
                 question: null,
                 editing: false,
                 newReply: false,
-                editReply: false
+                editReply: false,
+                hideme: false,
             }
         },
         created() {
@@ -44,12 +45,25 @@ import newreply from '../reply/newReply'
             listen() {
                 EventBus.$on('startEditing', () => {
                     this.editing = true
+                    this.hideme = false
+                    this.newReply = true
                 })
                 EventBus.$on('cancelEditing', () => {
                     this.editing = false
+                    this.newReply = false
+                    this.hideme = false
+
                 })
                   EventBus.$on('newReply', () => {
                     this.newReply = true
+                    this.hideme = true
+                })
+                 EventBus.$on('afterEdit', () => {
+                    this.newReply = false
+                    this.hideme = false
+                    this.editing = false
+                    this.editReply = false
+                     this.getQuestion()
                 })
                 //     EventBus.$on('editReply', () => {
                 //     this.editReply = true
@@ -58,6 +72,7 @@ import newreply from '../reply/newReply'
                 // })
                    EventBus.$on('cancelReply', () => {
                     this.newReply = false
+                    this.hideme = false
                 })
                   EventBus.$on('reload', () => {
                    this.getQuestion()

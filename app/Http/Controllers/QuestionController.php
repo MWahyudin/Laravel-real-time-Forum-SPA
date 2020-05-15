@@ -73,6 +73,6 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         $question->delete();
-        return response(null, Response::HTTP_NO_CONTENT);
+        return response("Berhasil Hapus", Response::HTTP_OK);
     }
 }
