@@ -3178,11 +3178,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['reply', 'question'],
+  props: ['reply', 'questionSlug'],
   data: function data() {
     return {
       form: {
-        body: null
+        body: null,
+        created_at: null,
+        id: null
       }
     };
   },
@@ -3191,8 +3193,27 @@ __webpack_require__.r(__webpack_exports__);
     this.form = this.reply;
   },
   methods: {
-    edit: function edit() {
-      alert('edited');
+    edit: function edit(slug, id) {
+      var data = this.form;
+      delete this.form.user;
+      Vue.swal({
+        title: 'Are you sure edit this reply?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'oke , update it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.patch("/api/question/".concat(slug, "/reply/").concat(id), data);
+          EventBus.$emit("cancelEditReply");
+          EventBus.$emit("reload");
+          Vue.swal('Updated!', 'Your reply has been edited.', 'success');
+        }
+      })["catch"](function (err) {
+        console.error(err);
+      });
     },
     cancel: function cancel() {
       EventBus.$emit('cancelEditReply');
@@ -30281,16 +30302,20 @@ var render = function() {
       _c(
         "v-btn",
         {
-          attrs: { type: "submit", outlined: "", color: "indigo" },
-          on: { click: _vm.edit }
+          attrs: { outlined: "", color: "indigo" },
+          on: {
+            click: function($event) {
+              return _vm.edit(_vm.questionSlug, _vm.reply.id)
+            }
+          }
         },
-        [_vm._v("\n               Edit Reply ok\n           ")]
+        [_vm._v("\n        Edit Reply ok\n    ")]
       ),
       _vm._v(" "),
       _c(
         "v-btn",
         { attrs: { outlined: "", color: "red" }, on: { click: _vm.cancel } },
-        [_vm._v("\n               Cancel\n           ")]
+        [_vm._v("\n        Cancel\n    ")]
       )
     ],
     1
@@ -30415,7 +30440,7 @@ var render = function() {
             _vm._l(_vm.replies, function(reply) {
               return _c("editreply", {
                 key: reply.id,
-                attrs: { reply: reply, question: _vm.question }
+                attrs: { reply: reply, questionSlug: _vm.question.slug }
               })
             }),
             1

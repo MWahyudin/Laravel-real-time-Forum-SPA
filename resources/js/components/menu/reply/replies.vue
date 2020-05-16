@@ -4,7 +4,7 @@
         <reply  v-for="reply in replies" :key="reply.id" :reply="reply" :question="question"></reply>
     </v-card>
     <v-card max-width="1400px" class="mx-auto" v-else>
-        <editreply  v-for="reply in replies" :key="reply.id" :reply="reply" :question="question"></editreply>
+        <editreply  v-for="reply in replies" :key="reply.id" :reply="reply" :questionSlug="question.slug"></editreply>
     </v-card>
   </div>
 </template>
