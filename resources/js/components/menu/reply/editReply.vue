@@ -34,6 +34,8 @@
             edit(slug, id) {
           let data = this.form
           delete this.form.user;
+           delete this.form.like_count;
+            delete this.form.liked;
               Vue.swal({
                     title: 'Are you sure edit this reply?',
                     text: "You won't be able to revert this!",

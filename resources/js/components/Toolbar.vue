@@ -15,15 +15,16 @@
             return {
                   loggedIn: User.loggedIn(),
                 
-                items: [{
-                        title: "Create category",
-                        to: "/create-category",
-                        show: User.admin()
-                    },
+                items: [
                     {
                         title: "Beranda",
                         to: "/beranda",
                         show: true
+                    },
+                    {
+                        title: "Create category",
+                        to: "/create-category",
+                        show: User.admin()
                     },
                     {
                         title: "Forum",

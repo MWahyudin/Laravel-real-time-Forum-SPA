@@ -6,11 +6,13 @@
                     {{ reply.user }}
                 </div>
                 <div class="caption mr-2">
-                    saidon
+                    said
                 </div>
                 <div class="subtitle-2">
                     {{ reply.created_at }}
                 </div>
+                <v-spacer></v-spacer>
+                <like :content='reply'></like>
             </v-card-title>
             <v-card-text v-if="!editReply" v-html="body">
                   <vue-simplemde v-if="editReply" v-model="form.body" v-html="reply.body" ref="markdownEditor" />
@@ -28,8 +30,10 @@
 </template>
 
 <script>
+import like from '../likes/like'
 import md from 'marked'
     export default {
+        components: {like},
         props: ['reply','question'],
         data(){
             return{

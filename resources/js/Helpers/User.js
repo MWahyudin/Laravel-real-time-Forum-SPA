@@ -55,7 +55,7 @@ own(id) {
 }
 
 admin() {
-    return this.id() == 1
+    return this.id() == 18
 }
 
 }
