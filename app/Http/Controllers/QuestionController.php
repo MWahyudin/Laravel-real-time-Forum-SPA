@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Model\Question;
 use App\User;
@@ -27,7 +28,7 @@ class QuestionController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
         // auth()->user()->question()->create($request->all());
     //     Question::create([
