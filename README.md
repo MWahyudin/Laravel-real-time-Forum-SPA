@@ -13,8 +13,15 @@
 6. php artisan serve
 
 Note : make sure you created database in database manager , edit database name in .env file
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<hr>
 
+Landing Page 
+![screenshot](screenshoot/landingpage.png)
+
+Ask Question
+![screenshot](screenshoot/askQuestion.png)
+<hr>
+<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
