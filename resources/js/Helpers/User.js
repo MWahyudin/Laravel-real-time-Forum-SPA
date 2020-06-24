@@ -2,11 +2,12 @@ import Token from './Token'
 import AppStorage from './AppStorage'
 
 class User {
-    login(data) {
-        axios.post('/api/auth/login', data)
-            .then(res => this.responseAfterLogin(res))
-            .catch(error => console.log(error.response.data))
-    }
+    // login(data) {
+    //     axios.post('/api/auth/login', data)
+    //         .then(res => this.responseAfterLogin(res))
+    //         .catch(error => error.response.data.error)
+            
+    // }
 
     responseAfterLogin(res) {
         const access_token = res.data.access_token
@@ -36,7 +37,7 @@ class User {
   
     logout(){
         AppStorage.clear()
-        window.location = '/forum';
+        window.location = '/'
     }
     name(){
         if(this.loggedIn()){
@@ -55,7 +56,7 @@ own(id) {
 }
 
 admin() {
-    return this.id() == 18
+    return this.id() == 17
 }
 
 }

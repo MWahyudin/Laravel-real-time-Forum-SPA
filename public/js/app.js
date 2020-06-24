@@ -2419,13 +2419,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      ifErrow: false,
       form: {
         email: null,
         password: null
-      }
+      },
+      errors: false
     };
   },
   created: function created() {
@@ -2437,8 +2443,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     login: function login() {
-      User.login(this.form);
-    }
+      var _this = this;
+
+      axios.post('/api/auth/login', this.form).then(function (res) {
+        return User.responseAfterLogin(res);
+      })["catch"](function () {
+        return _this.errors = true;
+      });
+    } // login() {
+    //    User.login(this.form)
+    // }
+
   }
 });
 
@@ -2816,6 +2831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -29405,6 +29421,22 @@ var render = function() {
           }
         },
         [
+          _c(
+            "v-alert",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.errors,
+                  expression: "errors"
+                }
+              ],
+              attrs: { type: "error" }
+            },
+            [_vm._v("\n  Salah , silahkan masukan ulang\n")]
+          ),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: { label: "E-mail", type: "email", required: "" },
             model: {
@@ -29417,12 +29449,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("v-text-field", {
-            attrs: {
-              counter: 10,
-              label: "Password",
-              type: "password",
-              required: ""
-            },
+            attrs: { label: "Password", type: "password", required: "" },
             model: {
               value: _vm.form.password,
               callback: function($$v) {
@@ -29435,7 +29462,11 @@ var render = function() {
           _c(
             "div",
             { staticClass: "blue--text font-italic font-weight-medium" },
-            [_vm._v("Belum punya akun ? daftar di sini , klik tombol daftar")]
+            [
+              _vm._v(
+                "Belum punya akun ? daftar di sini , klik tombol\n            daftar"
+              )
+            ]
           ),
           _vm._v(" "),
           _c(
@@ -88710,18 +88741,12 @@ var User = /*#__PURE__*/function () {
   }
 
   _createClass(User, [{
-    key: "login",
-    value: function login(data) {
-      var _this = this;
-
-      axios.post('/api/auth/login', data).then(function (res) {
-        return _this.responseAfterLogin(res);
-      })["catch"](function (error) {
-        return console.log(error.response.data);
-      });
-    }
-  }, {
     key: "responseAfterLogin",
+    // login(data) {
+    //     axios.post('/api/auth/login', data)
+    //         .then(res => this.responseAfterLogin(res))
+    //         .catch(error => error.response.data.error)
+    // }
     value: function responseAfterLogin(res) {
       var access_token = res.data.access_token;
       var username = res.data.user;
@@ -88751,7 +88776,7 @@ var User = /*#__PURE__*/function () {
     key: "logout",
     value: function logout() {
       _AppStorage__WEBPACK_IMPORTED_MODULE_1__["default"].clear();
-      window.location = '/forum';
+      window.location = '/';
     }
   }, {
     key: "name",
@@ -88777,7 +88802,7 @@ var User = /*#__PURE__*/function () {
   }, {
     key: "admin",
     value: function admin() {
-      return this.id() == 18;
+      return this.id() == 17;
     }
   }]);
 
@@ -88825,6 +88850,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 var routes = [//Question Path
 {
+  path: '/',
+  redirect: '/beranda'
+}, {
   path: '/create-question',
   component: _Components_menu_Question_Create__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, //Category Path

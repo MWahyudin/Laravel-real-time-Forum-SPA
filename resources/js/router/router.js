@@ -25,6 +25,10 @@ import beranda from '../components/Beranda.vue'
 
 const routes = [
     //Question Path
+	{
+		path: '/',
+		redirect:'/beranda'
+	},
     { path: '/create-question', component: createQuestion },
 
     //Category Path
