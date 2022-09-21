@@ -35,6 +35,6 @@
         "vue-simplemde": "^1.0.5",
         "vue-sweetalert2": "^3.0.5",
         "vuelidate": "^0.7.5",
-        "vuetify": "^2.2.27"
+        "vuetify": "^2.6.10"
     }
 }
